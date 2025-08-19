@@ -9,8 +9,7 @@
   glib,
   flutter,
   pkg-config,
-  jq,
-  yq,
+  buildPackages,
 }:
 
 # absolutely no mac support for now
@@ -39,7 +38,7 @@ let
   ++ flutterFlags;
 
   builderArgs =
-    rec {
+    let
       universal = args // {
         inherit flutterMode flutterFlags flutterBuildFlags;
 
@@ -112,9 +111,9 @@ let
 
         extraPackageConfigSetup = ''
           # https://github.com/flutter/flutter/blob/3.13.8/packages/flutter_tools/lib/src/dart/pub.dart#L755
-          if [ "$('${yq}/bin/yq' '.flutter.generate // false' pubspec.yaml)" = "true" ]; then
+          if [ "$('${lib.getExe buildPackages.yq}' '.flutter.generate // false' pubspec.yaml)" = "true" ]; then
             export TEMP_PACKAGES=$(mktemp)
-            '${jq}/bin/jq' '.packages |= . + [{
+            '${lib.getExe buildPackages.jq}' '.packages |= . + [{
               name: "flutter_gen",
               rootUri: "flutter_gen",
               languageVersion: "2.12",
@@ -125,6 +124,9 @@ let
           fi
         '';
       };
+    in
+    {
+      inherit universal;
 
       linux = universal // {
         outputs = universal.outputs or [ ] ++ [ "debug" ];

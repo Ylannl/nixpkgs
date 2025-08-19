@@ -1006,6 +1006,13 @@ in
     dependencies = [ self.nvim-yarp ];
   };
 
+  demicolon-nvim = super.demicolon-nvim.overrideAttrs {
+    dependencies = with self; [
+      nvim-treesitter
+      nvim-treesitter-textobjects
+    ];
+  };
+
   denops-vim = super.denops-vim.overrideAttrs {
     postPatch = ''
       # Use Nix's Deno instead of an arbitrary install
@@ -2601,6 +2608,12 @@ in
     checkInputs = [
       self.fzf-lua
     ];
+
+    nvimSkipModules = lib.optionals stdenv.hostPlatform.isDarwin [
+      #FIXME: https://github.com/NixOS/nixpkgs/issues/431458
+      # fzf-lua throws `address already in use` on darwin
+      "notify.integrations.fzf"
+    ];
   };
 
   nvim-nu = super.nvim-nu.overrideAttrs {
@@ -2739,7 +2752,13 @@ in
 
   nvim-unception = super.nvim-unception.overrideAttrs {
     # Attempt rpc socket connection
-    nvimSkipModules = "client.client";
+    nvimSkipModules = [
+      "client.client"
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [
+      "server.server"
+      "unception"
+    ];
   };
 
   nvim-vtsls = super.nvim-vtsls.overrideAttrs {
@@ -2748,6 +2767,8 @@ in
   };
 
   nvzone-menu = super.nvzone-menu.overrideAttrs {
+    # Plugin managers like Lazy.nvim expect pname to match the name of the git repository
+    pname = "menu";
     checkInputs = with self; [
       # Optional integrations
       nvim-tree-lua
@@ -2760,11 +2781,20 @@ in
   };
 
   nvzone-minty = super.nvzone-minty.overrideAttrs {
+    # Plugin managers like Lazy.nvim expect pname to match the name of the git repository
+    pname = "minty";
     dependencies = [ self.nvzone-volt ];
   };
 
   nvzone-typr = super.nvzone-typr.overrideAttrs {
+    # Plugin managers like Lazy.nvim expect pname to match the name of the git repository
+    pname = "typr";
     dependencies = [ self.nvzone-volt ];
+  };
+
+  nvzone-volt = super.nvzone-volt.overrideAttrs {
+    # Plugin managers like Lazy.nvim expect pname to match the name of the git repository
+    pname = "volt";
   };
 
   obsidian-nvim = super.obsidian-nvim.overrideAttrs {
@@ -2987,6 +3017,13 @@ in
       (replaceVars ./patches/preview-nvim/hardcode-mdt-binary-path.patch {
         mdt = lib.getExe md-tui;
       })
+    ];
+  };
+
+  project-nvim = super.project-nvim.overrideAttrs {
+    checkInputs = [
+      # Optional telescope integration
+      self.telescope-nvim
     ];
   };
 

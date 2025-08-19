@@ -16,20 +16,20 @@ let
 
   sources = {
     x86_64-linux = fetchurl {
-      url = "https://downloads.cursor.com/production/a1fa6fc7d2c2f520293aad84aaa38d091dee6fef/linux/x64/Cursor-1.3.8-x86_64.AppImage";
-      hash = "sha256-qR1Wu3H0JUCKIoUP/QFC1YyYiRaQ9PVN7ZT9TjHwn1k=";
+      url = "https://downloads.cursor.com/production/af58d92614edb1f72bdd756615d131bf8dfa5299/linux/x64/Cursor-1.4.5-x86_64.AppImage";
+      hash = "sha256-2Hz1tXC+YkIIHWG1nO3/84oygH+wvaUtTXqvv19ZAz4=";
     };
     aarch64-linux = fetchurl {
-      url = "https://downloads.cursor.com/production/a1fa6fc7d2c2f520293aad84aaa38d091dee6fef/linux/arm64/Cursor-1.3.8-aarch64.AppImage";
-      hash = "sha256-UrUstEFP8W8Y9WUCR5kt3434bKCBBK/NaSu2UK8+gII=";
+      url = "https://downloads.cursor.com/production/af58d92614edb1f72bdd756615d131bf8dfa5299/linux/arm64/Cursor-1.4.5-aarch64.AppImage";
+      hash = "sha256-kKoOSxLsgeM2FJRW2HlCinhz6Ij6lpVsbWxQmTiMBSs=";
     };
     x86_64-darwin = fetchurl {
-      url = "https://downloads.cursor.com/production/a1fa6fc7d2c2f520293aad84aaa38d091dee6fef/darwin/x64/Cursor-darwin-x64.dmg";
-      hash = "sha256-FGjqbOdr1HSjVlDYP/+vp4bVQoqdJww3U4t59QLg1kk=";
+      url = "https://downloads.cursor.com/production/af58d92614edb1f72bdd756615d131bf8dfa5299/darwin/x64/Cursor-darwin-x64.dmg";
+      hash = "sha256-fX8ukEWKS2prNz+UopZ9a4uhDLoGYuXa6P8cSJqBang=";
     };
     aarch64-darwin = fetchurl {
-      url = "https://downloads.cursor.com/production/a1fa6fc7d2c2f520293aad84aaa38d091dee6fef/darwin/arm64/Cursor-darwin-arm64.dmg";
-      hash = "sha256-tsVPS48APst7kbEh7cjhJ2zYKcKBDdjH+NXMpAe4Ixs=";
+      url = "https://downloads.cursor.com/production/af58d92614edb1f72bdd756615d131bf8dfa5299/darwin/arm64/Cursor-darwin-arm64.dmg";
+      hash = "sha256-J/by3BOoIV2HUtcCqaCEJoPzqcFFooc/zShSmEBSw/Q=";
     };
   };
 
@@ -39,7 +39,7 @@ in
   inherit useVSCodeRipgrep;
   commandLineArgs = finalCommandLineArgs;
 
-  version = "1.3.8";
+  version = "1.4.5";
   pname = "cursor";
 
   # You can find the current VSCode version in the About dialog:

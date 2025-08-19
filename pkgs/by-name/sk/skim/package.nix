@@ -12,7 +12,7 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "skim";
-  version = "0.20.3";
+  version = "0.20.5";
 
   outputs = [
     "out"
@@ -24,14 +24,14 @@ rustPlatform.buildRustPackage rec {
     owner = "skim-rs";
     repo = "skim";
     tag = "v${version}";
-    hash = "sha256-DyrndFT4gPLLdBtvS/QI0UDMtKKeK8oX2K2h4/6xvb0=";
+    hash = "sha256-BX0WW7dNpNLwxlclFCxj0QnrQ58lchKiEnmethzceqk=";
   };
 
   postPatch = ''
     sed -i -e "s|expand('<sfile>:h:h')|'$out'|" plugin/skim.vim
   '';
 
-  cargoHash = "sha256-BcWszU7S0imGlXgQ5e1L9yLfXzYzseK0z2BnqIqKkzg=";
+  cargoHash = "sha256-t2hkWTb/GhesNCWe2/YunZFo26xcXMjoNCiaKaFLOBk=";
 
   nativeBuildInputs = [ installShellFiles ];
 
