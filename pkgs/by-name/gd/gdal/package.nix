@@ -122,12 +122,6 @@ stdenv.mkDerivation (finalAttrs: {
 
   cmakeFlags = [
     "-DGDAL_USE_INTERNAL_LIBS=OFF"
-    "-DGEOTIFF_INCLUDE_DIR=${lib.getDev libgeotiff}/include"
-    "-DGEOTIFF_LIBRARY_RELEASE=${lib.getLib libgeotiff}/lib/libgeotiff${stdenv.hostPlatform.extensions.sharedLibrary}"
-    "-DMYSQL_INCLUDE_DIR=${lib.getDev libmysqlclient}/include/mysql"
-    "-DMYSQL_LIBRARY=${lib.getLib libmysqlclient}/lib/${
-      lib.optionalString (libmysqlclient.pname != "mysql") "mysql/"
-    }libmysqlclient${stdenv.hostPlatform.extensions.sharedLibrary}"
   ]
   ++ lib.optionals finalAttrs.doInstallCheck [
     "-DBUILD_TESTING=ON"
